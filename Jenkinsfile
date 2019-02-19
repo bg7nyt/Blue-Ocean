@@ -2,8 +2,17 @@ pipeline {
   agent any
   stages {
     stage('test') {
-      steps {
-        echo 'Helloworld!!!'
+      parallel {
+        stage('test') {
+          steps {
+            echo 'Helloworld!!!'
+          }
+        }
+        stage('Maven') {
+          steps {
+            sh 'mvn -version'
+          }
+        }
       }
     }
   }
